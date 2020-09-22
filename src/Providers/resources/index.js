@@ -6,3 +6,4 @@ export { activityCategory } from './activityCategory';
 export { manager } from './manager';
 export { newsletter } from './newsletter';
 export { profile } from './profile';
+export { service } from './service';

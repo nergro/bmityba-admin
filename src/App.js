@@ -12,6 +12,7 @@ import {
   Category,
   SupervisorAccount,
   Email,
+  Euro,
 } from '@material-ui/icons';
 
 import {
@@ -23,6 +24,7 @@ import {
   newsletter,
   manager,
   profile,
+  service,
 } from './pages';
 
 import Login from 'pages/Login';
@@ -42,6 +44,14 @@ const App = () => {
     >
       {(userType) => [
         <Resource name="profile" icon={Home} show={profile.Show} edit={profile.Edit} />,
+        <Resource
+          name="service"
+          icon={Euro}
+          list={service.List}
+          show={service.Show}
+          edit={service.Edit}
+          create={service.Create}
+        />,
         <Resource
           name="cabin"
           icon={Home}

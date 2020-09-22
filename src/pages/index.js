@@ -6,5 +6,16 @@ import * as activityCategory from './ActivityCategory';
 import * as manager from './Manager';
 import * as newsletter from './Newsletter';
 import * as profile from './Profile';
+import * as service from './Service';
 
-export { cabin, availableDate, benefit, activity, activityCategory, manager, newsletter, profile };
+export {
+  cabin,
+  availableDate,
+  benefit,
+  activity,
+  activityCategory,
+  manager,
+  newsletter,
+  profile,
+  service,
+};

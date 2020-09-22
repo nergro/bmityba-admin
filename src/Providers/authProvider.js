@@ -19,9 +19,10 @@ export default async (type, params) => {
     const token = getUserProperty('token');
     const localUserId = getUserProperty('id');
 
-    var config = {
+    const config = {
       headers: { Authorization: 'Bearer ' + token },
     };
+
     if (!token || !localUserId) {
       return Promise.reject();
     }

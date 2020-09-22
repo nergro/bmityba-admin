@@ -7,10 +7,14 @@ import {
   manager,
   newsletter,
   profile,
+  service,
 } from './resources';
 
 const actions = async (type, resource, params) => {
   switch (resource) {
+    case 'service': {
+      return service(type, params, resource);
+    }
     case 'cabin': {
       return cabin(type, params, resource);
     }
