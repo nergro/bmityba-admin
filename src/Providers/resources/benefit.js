@@ -26,11 +26,11 @@ export const benefit = async (type, params, resource) => {
     }
     case GET_ONE: {
       const {
-        data: { id, descriptionLT, descriptionEN },
+        data: { id, descriptionLT, descriptionEN, nameLT, nameEN },
       } = await axios.get(`/benefit/${params.id}`);
 
       return {
-        data: { id, descriptionLT, descriptionEN },
+        data: { id, descriptionLT, descriptionEN, nameLT, nameEN },
       };
     }
     case GET_MANY: {
@@ -41,11 +41,13 @@ export const benefit = async (type, params, resource) => {
     }
     case CREATE: {
       try {
-        const { descriptionLT, descriptionEN } = params.data;
+        const { descriptionLT, descriptionEN, nameLT, nameEN } = params.data;
 
         const { data } = await axios.post('/benefit', {
           descriptionLT,
           descriptionEN,
+          nameLT,
+          nameEN,
         });
 
         return { data };
@@ -58,11 +60,13 @@ export const benefit = async (type, params, resource) => {
     }
     case UPDATE: {
       try {
-        const { id, descriptionLT, descriptionEN } = params.data;
+        const { id, descriptionLT, descriptionEN, nameLT, nameEN } = params.data;
 
         await axios.put(`/benefit/${id}`, {
           descriptionLT,
           descriptionEN,
+          nameLT,
+          nameEN,
         });
 
         return { data: params };

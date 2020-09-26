@@ -48,12 +48,13 @@ export const service = async (type, params, resource) => {
     }
     case GET_ONE: {
       const {
-        data: { image, ...rest },
+        data: { image, benefits, ...rest },
       } = await axios.get(`/service/${params.id}`);
 
       return {
         data: {
           ...rest,
+          benefits,
           image,
         },
       };
@@ -70,6 +71,10 @@ export const service = async (type, params, resource) => {
           image,
           nameLT,
           nameEN,
+          labelLT,
+          labelEN,
+          shortDescriptionLT,
+          shortDescriptionEN,
           descriptionLT,
           descriptionEN,
           price,
@@ -92,6 +97,10 @@ export const service = async (type, params, resource) => {
           image: uploadedImage,
           nameLT,
           nameEN,
+          labelLT,
+          labelEN,
+          shortDescriptionLT,
+          shortDescriptionEN,
           descriptionLT,
           descriptionEN,
           price,
@@ -119,6 +128,10 @@ export const service = async (type, params, resource) => {
           image,
           nameLT,
           nameEN,
+          labelLT,
+          labelEN,
+          shortDescriptionLT,
+          shortDescriptionEN,
           descriptionLT,
           descriptionEN,
           price,
@@ -150,6 +163,10 @@ export const service = async (type, params, resource) => {
           image: uploadedImage,
           nameLT,
           nameEN,
+          labelLT,
+          labelEN,
+          shortDescriptionLT,
+          shortDescriptionEN,
           descriptionLT,
           descriptionEN,
           price,

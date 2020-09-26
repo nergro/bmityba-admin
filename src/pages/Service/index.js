@@ -14,6 +14,9 @@ import {
   Edit as EditComp,
   ImageField,
   ImageInput,
+  ReferenceArrayField,
+  ReferenceArrayInput,
+  SelectArrayInput,
 } from 'react-admin';
 import { MultiTextField } from 'Components/MultiTextField';
 
@@ -24,10 +27,6 @@ import styled from 'styled-components';
 const StyledHR = styled.hr`
   width: 100% !important;
   background: #aaaaaa;
-`;
-
-const StyledP = styled.p`
-  font-weight: 600;
 `;
 
 export const List = (props) => {
@@ -49,6 +48,10 @@ export const Show = (props) => {
         <ImageField source="image.imageUrl" title="image" label="Image" />
         <TextField source="nameLT" label="Name LT" />
         <TextField source="nameEN" label="Name EN" />
+        <TextField source="labelLT" label="Label LT" />
+        <TextField source="labelEN" label="Label EN" />
+        <MultiTextField source="shortDescriptionLT" label="Short description LT" />
+        <MultiTextField source="shortDescriptionEN" label="Short description EN" />
         <MultiTextField source="descriptionLT" label="Description LT" />
         <MultiTextField source="descriptionEN" label="Description EN" />
         <NumberField source="price" />
@@ -60,26 +63,11 @@ export const Show = (props) => {
         <TextField source="benefitsTitleEN" label="Benefits Title EN" />
         <MultiTextField source="benefitsDescriptionLT" label="Benefits description LT" />
         <MultiTextField source="benefitsDescriptionEN" label="Benefits description EN" />
-        <StyledP>Benefit 1</StyledP>
-        <TextField source="benefits.benefit1NameLT" label="Name LT" />
-        <TextField source="benefits.benefit1NameEN" label="Name EN" />
-        <TextField source="benefits.benefit1DescriptionLT" label="Description LT" multiline />
-        <TextField source="benefits.benefit1DescriptionEN" label="Description EN" multiline />
-        <StyledP>Benefit 2</StyledP>
-        <TextField source="benefits.benefit2NameLT" label="Name LT" />
-        <TextField source="benefits.benefit2NameEN" label="Name EN" />
-        <TextField source="benefits.benefit2DescriptionLT" label="Description LT" multiline />
-        <TextField source="benefits.benefit2DescriptionEN" label="Description EN" multiline />
-        <StyledP>Benefit 3</StyledP>
-        <TextField source="benefits.benefit3NameLT" label="Name LT" />
-        <TextField source="benefits.benefit3NameEN" label="Name EN" />
-        <TextField source="benefits.benefit3DescriptionLT" label="Description LT" multiline />
-        <TextField source="benefits.benefit3DescriptionEN" label="Description EN" multiline />
-        <StyledP>Benefit 4</StyledP>
-        <TextField source="benefits.benefit4NameLT" label="Name LT" />
-        <TextField source="benefits.benefit4NameEN" label="Name EN" />
-        <TextField source="benefits.benefit4DescriptionLT" label="Description LT" multiline />
-        <TextField source="benefits.benefit4DescriptionEN" label="Description EN" multiline />
+        <ReferenceArrayField label="" reference="benefit" source="benefits">
+          <Datagrid rowClick="show">
+            <TextField source="nameEN" label="Benefits" />
+          </Datagrid>
+        </ReferenceArrayField>
       </SimpleShowLayout>
     </ShowComp>
   );
@@ -90,10 +78,24 @@ export const Create = (props) => {
     <CreateComponent props={props} redirect="list">
       <SimpleForm redirect="show">
         <ImageInput source="image" label="Upload image" accept="image/*" validate={required()}>
-          <ImageField source="url" title="Image" />
+          <ImageField source="imageUrl" title="Image" />
         </ImageInput>
         <TextInput source="nameLT" label="Name LT" validate={required()} />
         <TextInput source="nameEN" label="Name EN" validate={required()} />
+        <TextInput source="labelLT" label="Label LT" />
+        <TextInput source="labelEN" label="Label EN" />
+        <TextInput
+          source="shortDescriptionLT"
+          label="Short description LT"
+          validate={required()}
+          multiline
+        />
+        <TextInput
+          source="shortDescriptionEN"
+          label="Short description EN"
+          validate={required()}
+          multiline
+        />
         <TextInput source="descriptionLT" label="Description LT" validate={required()} multiline />
         <TextInput source="descriptionEN" label="Description EN" validate={required()} multiline />
         <NumberInput source="price" step={1} validate={required()} />
@@ -126,26 +128,9 @@ export const Create = (props) => {
           validate={required()}
           multiline
         />
-        <StyledP>Benefit 1</StyledP>
-        <TextInput source="benefits.benefit1NameLT" label="Name LT" />
-        <TextInput source="benefits.benefit1NameEN" label="Name EN" />
-        <TextInput source="benefits.benefit1DescriptionLT" label="Description LT" multiline />
-        <TextInput source="benefits.benefit1DescriptionEN" label="Description EN" multiline />
-        <StyledP>Benefit 2</StyledP>
-        <TextInput source="benefits.benefit2NameLT" label="Name LT" />
-        <TextInput source="benefits.benefit2NameEN" label="Name EN" />
-        <TextInput source="benefits.benefit2DescriptionLT" label="Description LT" multiline />
-        <TextInput source="benefits.benefit2DescriptionEN" label="Description EN" multiline />
-        <StyledP>Benefit 3</StyledP>
-        <TextInput source="benefits.benefit3NameLT" label="Name LT" />
-        <TextInput source="benefits.benefit3NameEN" label="Name EN" />
-        <TextInput source="benefits.benefit3DescriptionLT" label="Description LT" multiline />
-        <TextInput source="benefits.benefit3DescriptionEN" label="Description EN" multiline />
-        <StyledP>Benefit 4</StyledP>
-        <TextInput source="benefits.benefit4NameLT" label="Name LT" />
-        <TextInput source="benefits.benefit4NameEN" label="Name EN" />
-        <TextInput source="benefits.benefit4DescriptionLT" label="Description LT" multiline />
-        <TextInput source="benefits.benefit4DescriptionEN" label="Description EN" multiline />
+        <ReferenceArrayInput label="Benefits" source="benefits" reference="benefit">
+          <SelectArrayInput optionText="nameEN" />
+        </ReferenceArrayInput>
       </SimpleForm>
     </CreateComponent>
   );
@@ -158,8 +143,23 @@ export const Edit = (props) => {
         <ImageInput source="image" label="Upload image" accept="image/*" validate={required()}>
           <ImageField source="imageUrl" title="Image" />
         </ImageInput>
+
         <TextInput source="nameLT" label="Name LT" validate={required()} />
         <TextInput source="nameEN" label="Name EN" validate={required()} />
+        <TextInput source="labelLT" label="Label LT" />
+        <TextInput source="labelEN" label="Label EN" />
+        <TextInput
+          source="shortDescriptionLT"
+          label="Short description LT"
+          validate={required()}
+          multiline
+        />
+        <TextInput
+          source="shortDescriptionEN"
+          label="Short description EN"
+          validate={required()}
+          multiline
+        />
         <TextInput source="descriptionLT" label="Description LT" validate={required()} multiline />
         <TextInput source="descriptionEN" label="Description EN" validate={required()} multiline />
         <NumberInput source="price" step={1} validate={required()} />
@@ -192,26 +192,9 @@ export const Edit = (props) => {
           validate={required()}
           multiline
         />
-        <StyledP>Benefit 1</StyledP>
-        <TextInput source="benefits.benefit1NameLT" label="Name LT" />
-        <TextInput source="benefits.benefit1NameEN" label="Name EN" />
-        <TextInput source="benefits.benefit1DescriptionLT" label="Description LT" multiline />
-        <TextInput source="benefits.benefit1DescriptionEN" label="Description EN" multiline />
-        <StyledP>Benefit 2</StyledP>
-        <TextInput source="benefits.benefit2NameLT" label="Name LT" />
-        <TextInput source="benefits.benefit2NameEN" label="Name EN" />
-        <TextInput source="benefits.benefit2DescriptionLT" label="Description LT" multiline />
-        <TextInput source="benefits.benefit2DescriptionEN" label="Description EN" multiline />
-        <StyledP>Benefit 3</StyledP>
-        <TextInput source="benefits.benefit3NameLT" label="Name LT" />
-        <TextInput source="benefits.benefit3NameEN" label="Name EN" />
-        <TextInput source="benefits.benefit3DescriptionLT" label="Description LT" multiline />
-        <TextInput source="benefits.benefit3DescriptionEN" label="Description EN" multiline />
-        <StyledP>Benefit 4</StyledP>
-        <TextInput source="benefits.benefit4NameLT" label="Name LT" />
-        <TextInput source="benefits.benefit4NameEN" label="Name EN" />
-        <TextInput source="benefits.benefit4DescriptionLT" label="Description LT" multiline />
-        <TextInput source="benefits.benefit4DescriptionEN" label="Description EN" multiline />
+        <ReferenceArrayInput label="Benefits" source="benefits" reference="benefit">
+          <SelectArrayInput optionText="nameEN" />
+        </ReferenceArrayInput>
       </SimpleForm>
     </EditComp>
   );
