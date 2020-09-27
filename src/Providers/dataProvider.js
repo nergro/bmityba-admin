@@ -1,4 +1,4 @@
-import { benefit, newsletter, profile, service, question } from './resources';
+import { benefit, newsletter, profile, service, question, contacts } from './resources';
 
 const actions = async (type, resource, params) => {
   switch (resource) {
@@ -7,6 +7,9 @@ const actions = async (type, resource, params) => {
     }
     case 'benefit': {
       return benefit(type, params, resource);
+    }
+    case 'contacts': {
+      return contacts(type, params, resource);
     }
     case 'question': {
       return question(type, params, resource);

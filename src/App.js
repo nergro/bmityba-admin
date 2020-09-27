@@ -4,9 +4,9 @@ import dataProvider from 'Providers/dataProvider';
 import authProvider from 'Providers/authProvider';
 import Dashboard from 'pages/Dashboard';
 import { Route } from 'react-router-dom';
-import { Home, ThumbUp, Email, Euro, HelpOutline } from '@material-ui/icons';
+import { Home, ThumbUp, Email, Euro, HelpOutline, Phone } from '@material-ui/icons';
 
-import { benefit, newsletter, profile, service, question } from './pages';
+import { benefit, newsletter, profile, service, question, contacts } from './pages';
 
 import Login from 'pages/Login';
 import MyLayout from 'Components/Layout/MyLayout';
@@ -48,6 +48,14 @@ const App = () => {
           show={question.Show}
           edit={question.Edit}
           create={question.Create}
+        />,
+        <Resource
+          name="contacts"
+          icon={Phone}
+          list={contacts.List}
+          show={contacts.Show}
+          edit={contacts.Edit}
+          create={contacts.Create}
         />,
         <Resource
           name="newsletter"
