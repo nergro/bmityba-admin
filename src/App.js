@@ -4,28 +4,9 @@ import dataProvider from 'Providers/dataProvider';
 import authProvider from 'Providers/authProvider';
 import Dashboard from 'pages/Dashboard';
 import { Route } from 'react-router-dom';
-import {
-  Home,
-  EventAvailable,
-  ThumbUp,
-  DirectionsRun,
-  Category,
-  SupervisorAccount,
-  Email,
-  Euro,
-} from '@material-ui/icons';
+import { Home, ThumbUp, Email, Euro, HelpOutline } from '@material-ui/icons';
 
-import {
-  cabin,
-  availableDate,
-  benefit,
-  activity,
-  activityCategory,
-  newsletter,
-  manager,
-  profile,
-  service,
-} from './pages';
+import { benefit, newsletter, profile, service, question } from './pages';
 
 import Login from 'pages/Login';
 import MyLayout from 'Components/Layout/MyLayout';
@@ -42,40 +23,8 @@ const App = () => {
       ]}
       appLayout={MyLayout}
     >
-      {(userType) => [
+      {() => [
         <Resource name="profile" icon={Home} show={profile.Show} edit={profile.Edit} />,
-        <Resource
-          name="service"
-          icon={Euro}
-          list={service.List}
-          show={service.Show}
-          edit={service.Edit}
-          create={service.Create}
-        />,
-        <Resource
-          name="cabin"
-          icon={Home}
-          list={cabin.List}
-          show={cabin.Show}
-          edit={cabin.Edit}
-          create={cabin.Create}
-        />,
-        <Resource
-          name="activity"
-          icon={DirectionsRun}
-          list={activity.List}
-          show={activity.Show}
-          edit={activity.Edit}
-          create={activity.Create}
-        />,
-        <Resource
-          name="availableDate"
-          options={{ label: 'Available Dates' }}
-          icon={EventAvailable}
-          list={availableDate.List}
-          show={availableDate.Show}
-          create={availableDate.Create}
-        />,
         <Resource
           name="benefit"
           icon={ThumbUp}
@@ -85,13 +34,20 @@ const App = () => {
           create={benefit.Create}
         />,
         <Resource
-          name="activityCategory"
-          options={{ label: 'Activity Categories' }}
-          icon={Category}
-          list={activityCategory.List}
-          show={activityCategory.Show}
-          edit={activityCategory.Edit}
-          create={activityCategory.Create}
+          name="service"
+          icon={Euro}
+          list={service.List}
+          show={service.Show}
+          edit={service.Edit}
+          create={service.Create}
+        />,
+        <Resource
+          name="question"
+          icon={HelpOutline}
+          list={question.List}
+          show={question.Show}
+          edit={question.Edit}
+          create={question.Create}
         />,
         <Resource
           name="newsletter"
@@ -100,15 +56,6 @@ const App = () => {
           show={newsletter.Show}
           create={newsletter.Create}
         />,
-        userType === 'Admin' && (
-          <Resource
-            name="manager"
-            icon={SupervisorAccount}
-            list={manager.List}
-            show={manager.Show}
-            create={manager.Create}
-          />
-        ),
       ]}
     </Admin>
   );

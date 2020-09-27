@@ -2,7 +2,7 @@ import axios from 'axios';
 import { stringify } from 'query-string';
 import { DELETE, GET_LIST, GET_ONE, CREATE, UPDATE, DELETE_MANY, GET_MANY } from 'react-admin';
 
-export const activityCategory = async (type, params, resource) => {
+export const question = async (type, params, resource) => {
   switch (type) {
     case GET_LIST: {
       const { page, perPage } = params.pagination;
@@ -26,26 +26,28 @@ export const activityCategory = async (type, params, resource) => {
     }
     case GET_ONE: {
       const {
-        data: { id, nameLT, nameEN },
-      } = await axios.get(`/activitycategory/${params.id}`);
+        data: { id, questionLT, questionEN, answerLT, answerEN },
+      } = await axios.get(`/question/${params.id}`);
 
       return {
-        data: { id, nameLT, nameEN },
+        data: { id, questionLT, questionEN, answerLT, answerEN },
       };
     }
     case GET_MANY: {
       const {
         data: { items },
-      } = await axios.get(`/activitycategory`);
+      } = await axios.get(`/question`);
       return { data: items };
     }
     case CREATE: {
       try {
-        const { nameLT, nameEN } = params.data;
+        const { questionLT, questionEN, answerLT, answerEN } = params.data;
 
-        const { data } = await axios.post('/activitycategory', {
-          nameLT,
-          nameEN,
+        const { data } = await axios.post('/question', {
+          questionLT,
+          questionEN,
+          answerLT,
+          answerEN,
         });
 
         return { data };
@@ -58,11 +60,13 @@ export const activityCategory = async (type, params, resource) => {
     }
     case UPDATE: {
       try {
-        const { id, nameLT, nameEN } = params.data;
+        const { id, questionLT, questionEN, answerLT, answerEN } = params.data;
 
-        await axios.put(`/activitycategory/${id}`, {
-          nameLT,
-          nameEN,
+        await axios.put(`/question/${id}`, {
+          questionLT,
+          questionEN,
+          answerLT,
+          answerEN,
         });
 
         return { data: params };
@@ -72,12 +76,12 @@ export const activityCategory = async (type, params, resource) => {
     }
     case DELETE: {
       const { id } = params;
-      const { data } = await axios.delete(`/activitycategory/${id}`);
+      const { data } = await axios.delete(`/question/${id}`);
       return { data };
     }
     case DELETE_MANY: {
       const { ids } = params;
-      await axios.delete(`/activitycategory`, { data: { ids } });
+      await axios.delete(`/question`, { data: { ids } });
       return { data: ids };
     }
     default:
