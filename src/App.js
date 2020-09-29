@@ -4,9 +4,9 @@ import dataProvider from 'Providers/dataProvider';
 import authProvider from 'Providers/authProvider';
 import Dashboard from 'pages/Dashboard';
 import { Route } from 'react-router-dom';
-import { Home, ThumbUp, Email, Euro, HelpOutline, Phone } from '@material-ui/icons';
+import { Home, ThumbUp, Euro, HelpOutline, Phone, MenuBook } from '@material-ui/icons';
 
-import { benefit, newsletter, profile, service, question, contacts } from './pages';
+import { benefit, profile, service, question, contacts, post } from './pages';
 
 import Login from 'pages/Login';
 import MyLayout from 'Components/Layout/MyLayout';
@@ -58,11 +58,11 @@ const App = () => {
           create={contacts.Create}
         />,
         <Resource
-          name="newsletter"
-          icon={Email}
-          list={newsletter.List}
-          show={newsletter.Show}
-          create={newsletter.Create}
+          name="post"
+          icon={MenuBook}
+          list={post.List}
+          show={post.Show}
+          create={post.Create}
         />,
       ]}
     </Admin>

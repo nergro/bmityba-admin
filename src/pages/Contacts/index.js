@@ -65,7 +65,7 @@ const PostEditToolbar = (props) => (
 
 export const Edit = (props) => {
   return (
-    <EditComp {...props} title={<SectionTitle action="Cabin" />}>
+    <EditComp {...props} title={<SectionTitle action="Contacts" />}>
       <SimpleForm redirect="show" toolbar={<PostEditToolbar />}>
         <TextInput source="phone" label="Phone" validate={required()} />
         <TextInput source="email" label="Email" validate={required()} />
