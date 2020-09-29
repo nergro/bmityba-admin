@@ -62,6 +62,7 @@ const App = () => {
           icon={MenuBook}
           list={post.List}
           show={post.Show}
+          edit={post.Edit}
           create={post.Create}
         />,
       ]}
