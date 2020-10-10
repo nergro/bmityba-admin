@@ -4,9 +4,9 @@ import dataProvider from 'Providers/dataProvider';
 import authProvider from 'Providers/authProvider';
 import Dashboard from 'pages/Dashboard';
 import { Route } from 'react-router-dom';
-import { Home, ThumbUp, Euro, HelpOutline, Phone, MenuBook } from '@material-ui/icons';
+import { Home, ThumbUp, Euro, HelpOutline, Phone, MenuBook, Category } from '@material-ui/icons';
 
-import { benefit, profile, service, question, contacts, post } from './pages';
+import { benefit, profile, service, question, contacts, post, postCategry } from './pages';
 
 import Login from 'pages/Login';
 import MyLayout from 'Components/Layout/MyLayout';
@@ -56,6 +56,14 @@ const App = () => {
           show={contacts.Show}
           edit={contacts.Edit}
           create={contacts.Create}
+        />,
+        <Resource
+          name="post-category"
+          icon={Category}
+          list={postCategry.List}
+          show={postCategry.Show}
+          edit={postCategry.Edit}
+          create={postCategry.Create}
         />,
         <Resource
           name="post"
