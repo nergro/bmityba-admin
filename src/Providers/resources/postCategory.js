@@ -14,7 +14,7 @@ export const postCategory = async (type, params, resource) => {
         perPage,
       };
 
-      const url = `/${resource}?${stringify(query)}`;
+      const url = `/post-category?${stringify(query)}`;
       const {
         data: { items, total },
       } = await axios.get(url);

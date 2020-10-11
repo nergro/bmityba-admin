@@ -1,6 +1,29 @@
 import axios from 'axios';
 import { stringify } from 'query-string';
 import { DELETE, GET_LIST, GET_ONE, CREATE, UPDATE, DELETE_MANY, GET_MANY } from 'react-admin';
+import moment from 'moment';
+
+const uploadImage = (formData) =>
+  fetch('https://api.cloudinary.com/v1_1/dmckzsz3u/image/upload', {
+    method: 'POST',
+    headers: {
+      'X-Requested-With': 'XMLHttpRequest',
+    },
+    body: formData,
+  }).then((x) => x.json());
+
+const getFormData = (image, location) => {
+  const formData = new FormData();
+  const uniqueFileName = image.name + '-' + new Date().toISOString();
+
+  formData.append('file', image);
+  formData.append('tags', 'posts');
+  formData.append('upload_preset', 'qzc6powb');
+  formData.append('api_key', '631366814312264');
+  formData.append('timestamp', (Date.now() / 1000) | 0);
+  formData.append('public_id', `${location}/${uniqueFileName}`);
+  return formData;
+};
 
 export const post = async (type, params, resource) => {
   switch (type) {
@@ -26,11 +49,11 @@ export const post = async (type, params, resource) => {
     }
     case GET_ONE: {
       const {
-        data: { id, title, category, date, content },
+        data: { id, title, category, date, content, image },
       } = await axios.get(`/post/${params.id}`);
 
       return {
-        data: { id, title, category, date, content },
+        data: { id, title, category, date, content, image },
       };
     }
     case GET_MANY: {
@@ -41,13 +64,20 @@ export const post = async (type, params, resource) => {
     }
     case CREATE: {
       try {
-        const { title, category, content } = params.data;
+        const { title, category, content, image } = params.data;
+
+        const uploadedImageData = await uploadImage(getFormData(image.rawFile, 'services'));
+        const uploadedImage = {
+          imageUrl: uploadedImageData.secure_url,
+          imageId: uploadedImageData.public_id,
+        };
 
         const { data } = await axios.post('/post', {
           title,
           category,
-          date: '2020-09-30',
+          date: moment(),
           content,
+          image: uploadedImage,
         });
 
         return { data };
@@ -60,13 +90,29 @@ export const post = async (type, params, resource) => {
     }
     case UPDATE: {
       try {
-        const { id, title, category, content } = params.data;
+        const { id, title, category, content, image } = params.data;
+
+        let uploadedImage = {};
+
+        if (image.rawFile) {
+          const uploadedImageData = await uploadImage(getFormData(image.rawFile, 'services'));
+          uploadedImage = {
+            imageUrl: uploadedImageData.secure_url,
+            imageId: uploadedImageData.public_id,
+          };
+        } else {
+          uploadedImage = {
+            imageUrl: image.imageUrl,
+            imageId: image.imageId,
+          };
+        }
 
         await axios.put(`/post/${id}`, {
           title,
           category,
-          date: '2020-09-30',
+          date: moment(),
           content,
+          image: uploadedImage,
         });
 
         return { data: params };
