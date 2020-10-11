@@ -49,11 +49,11 @@ export const post = async (type, params, resource) => {
     }
     case GET_ONE: {
       const {
-        data: { id, title, category, date, content, image },
+        data: { id, titleLT, titleEN, category, date, contentLT, contentEN, image },
       } = await axios.get(`/post/${params.id}`);
 
       return {
-        data: { id, title, category, date, content, image },
+        data: { id, titleLT, titleEN, category, date, contentLT, contentEN, image },
       };
     }
     case GET_MANY: {
@@ -64,7 +64,7 @@ export const post = async (type, params, resource) => {
     }
     case CREATE: {
       try {
-        const { title, category, content, image } = params.data;
+        const { titleLT, titleEN, category, contentLT, contentEN, image } = params.data;
 
         const uploadedImageData = await uploadImage(getFormData(image.rawFile, 'services'));
         const uploadedImage = {
@@ -73,10 +73,12 @@ export const post = async (type, params, resource) => {
         };
 
         const { data } = await axios.post('/post', {
-          title,
+          titleLT,
+          titleEN,
           category,
           date: moment(),
-          content,
+          contentLT,
+          contentEN,
           image: uploadedImage,
         });
 
@@ -90,7 +92,7 @@ export const post = async (type, params, resource) => {
     }
     case UPDATE: {
       try {
-        const { id, title, category, content, image } = params.data;
+        const { id, titleLT, titleEN, category, contentLT, contentEN, image } = params.data;
 
         let uploadedImage = {};
 
@@ -108,10 +110,12 @@ export const post = async (type, params, resource) => {
         }
 
         await axios.put(`/post/${id}`, {
-          title,
+          titleLT,
+          titleEN,
           category,
           date: moment(),
-          content,
+          contentLT,
+          contentEN,
           image: uploadedImage,
         });
 

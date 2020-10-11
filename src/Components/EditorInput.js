@@ -17,7 +17,9 @@ export const EditorInput = (props) => {
 
   return (
     <Wrapper>
-      <p>Content*</p>
+      <p style={{ fontFamily: 'Roboto', color: '#4f4f4f' }}>
+        {props.source.charAt(0).toUpperCase() + props.source.slice(1)} *
+      </p>
       <EditorComponent
         source={props.source}
         name={name}
