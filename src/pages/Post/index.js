@@ -10,6 +10,11 @@ import {
   required,
   RichTextField,
   DateField,
+  ImageField,
+  ImageInput,
+  ReferenceInput,
+  SelectInput,
+  ReferenceField,
   Edit as EditComp,
 } from 'react-admin';
 
@@ -22,8 +27,10 @@ export const List = (props) => {
   return (
     <ListComp exporter={false} {...props}>
       <Datagrid rowClick="show">
-        <TextField source="title" label="Title" />
-        <TextField source="category" label="Category" />
+        <TextField source="titleEN" label="Title" />
+        <ReferenceField label="Category" source="category" reference="post-category">
+          <TextField source="nameEN" />
+        </ReferenceField>
         <DateField source="date" label="Date" locales="lt-LT" />
         <RichTextField source="content" label="Content" />
       </Datagrid>
@@ -35,10 +42,17 @@ export const Show = (props) => {
   return (
     <ShowComp title={<SectionTitle action="Newsletter" />} {...props}>
       <SimpleShowLayout>
-        <TextField source="title" label="Title" />
-        <TextField source="category" label="Category" />
+        <ImageField source="image.imageUrl" title="image" label="Image" />
+        <TextField source="titleLT" label="Title LT" />
+        <TextField source="titleEN" label="Title EN" />
+        <TextField source="shortDescriptionLT" label="ShortDescription LT" />
+        <TextField source="shortDescriptionEN" label="ShortDescription EN" />
+        <ReferenceField label="Category" source="category" reference="post-category">
+          <TextField source="nameEN" />
+        </ReferenceField>
         <DateField source="date" label="Date" locales="lt-LT" />
-        <RichTextField source="content" label="Content" />
+        <RichTextField source="contentLT" label="ContentLT" />
+        <RichTextField source="contentEN" label="ContentEN" />
       </SimpleShowLayout>
     </ShowComp>
   );
@@ -48,9 +62,23 @@ export const Create = (props) => {
   return (
     <CreateComponent props={props} redirect="list">
       <SimpleForm redirect="show">
-        <TextInput source="title" label="Title" validate={required()} />
-        <TextInput source="category" label="Category" validate={required()} />
-        <EditorInput name="content" source="content" />
+        <ImageInput source="image" label="Upload image" accept="image/*" validate={required()}>
+          <ImageField source="imageUrl" title="Image" />
+        </ImageInput>
+        <ReferenceInput
+          label="Category"
+          source="category"
+          reference="post-category"
+          validate={required()}
+        >
+          <SelectInput optionText="nameEN" />
+        </ReferenceInput>
+        <TextInput source="titleLT" label="TitleLT" validate={required()} />
+        <TextInput source="titleEN" label="TitleEN" validate={required()} />
+        <TextInput source="shortDescriptionLT" label="ShortDescription LT" validate={required()} />
+        <TextInput source="shortDescriptionEN" label="ShortDescription EN" validate={required()} />
+        <EditorInput name="contentLT" source="contentLT" />
+        <EditorInput name="contentEN" source="contentEN" />
       </SimpleForm>
     </CreateComponent>
   );
@@ -59,10 +87,24 @@ export const Create = (props) => {
 export const Edit = (props) => {
   return (
     <EditComp {...props} title={<SectionTitle action="Post" />}>
-      <SimpleForm redirect="show">
-        <TextInput source="title" label="Title" validate={required()} />
-        <TextInput source="category" label="Category" validate={required()} />
-        <EditorInput name="content" source="content" />
+      <SimpleForm redirect="list">
+        <ImageInput source="image" label="Upload image" accept="image/*" validate={required()}>
+          <ImageField source="imageUrl" title="Image" />
+        </ImageInput>
+        <ReferenceInput
+          label="Category"
+          source="category"
+          reference="post-category"
+          validate={required()}
+        >
+          <SelectInput optionText="nameEN" />
+        </ReferenceInput>
+        <TextInput source="titleLT" label="TitleLT" validate={required()} />
+        <TextInput source="titleEN" label="TitleEN" validate={required()} />
+        <TextInput source="shortDescriptionLT" label="ShortDescription LT" validate={required()} />
+        <TextInput source="shortDescriptionEN" label="ShortDescription EN" validate={required()} />
+        <EditorInput name="contentLT" source="contentLT" />
+        <EditorInput name="contentEN" source="contentEN" />
       </SimpleForm>
     </EditComp>
   );

@@ -4,5 +4,6 @@ import * as service from './Service';
 import * as question from './Question';
 import * as contacts from './Contacts';
 import * as post from './Post';
+import * as postCategry from './PostCategory';
 
-export { benefit, profile, service, question, contacts, post };
+export { benefit, profile, service, question, contacts, post, postCategry };

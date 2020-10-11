@@ -4,3 +4,4 @@ export { service } from './service';
 export { question } from './question';
 export { contacts } from './contacts';
 export { post } from './post';
+export { postCategory } from './postCategory';
