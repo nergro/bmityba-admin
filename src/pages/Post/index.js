@@ -45,6 +45,8 @@ export const Show = (props) => {
         <ImageField source="image.imageUrl" title="image" label="Image" />
         <TextField source="titleLT" label="Title LT" />
         <TextField source="titleEN" label="Title EN" />
+        <TextField source="shortDescriptionLT" label="ShortDescription LT" />
+        <TextField source="shortDescriptionEN" label="ShortDescription EN" />
         <ReferenceField label="Category" source="category" reference="post-category">
           <TextField source="nameEN" />
         </ReferenceField>
@@ -73,6 +75,8 @@ export const Create = (props) => {
         </ReferenceInput>
         <TextInput source="titleLT" label="TitleLT" validate={required()} />
         <TextInput source="titleEN" label="TitleEN" validate={required()} />
+        <TextInput source="shortDescriptionLT" label="ShortDescription LT" validate={required()} />
+        <TextInput source="shortDescriptionEN" label="ShortDescription EN" validate={required()} />
         <EditorInput name="contentLT" source="contentLT" />
         <EditorInput name="contentEN" source="contentEN" />
       </SimpleForm>
@@ -97,6 +101,8 @@ export const Edit = (props) => {
         </ReferenceInput>
         <TextInput source="titleLT" label="TitleLT" validate={required()} />
         <TextInput source="titleEN" label="TitleEN" validate={required()} />
+        <TextInput source="shortDescriptionLT" label="ShortDescription LT" validate={required()} />
+        <TextInput source="shortDescriptionEN" label="ShortDescription EN" validate={required()} />
         <EditorInput name="contentLT" source="contentLT" />
         <EditorInput name="contentEN" source="contentEN" />
       </SimpleForm>
